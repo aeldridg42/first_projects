@@ -11,6 +11,7 @@ int main()
     printf("islower - %d\n", ft_islower(prikol[2]));
     printf("isspace - %d\n", ft_isspace(prikol[2]));
     printf("isupper - %d\n", ft_isupper(prikol[0]));
-    printf("strrev - %s\n", strrev(prikol));
+    printf("untstrrev - !%s!\n", prikol);
+    printf("strrev - !%s!\n", ft_strrev(prikol));
 
 }
