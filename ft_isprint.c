@@ -1,8 +1,8 @@
 #include "libft.h"
 
-int ft_isdigit(int c)
+int ft_isprint(int c)
 {
-    if(c >= '0' && c <= '9')
+    if(c >= 0x20 && c <= 0x7E)
         return(1);
     return(0);
 }
