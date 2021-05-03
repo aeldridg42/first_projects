@@ -4,7 +4,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
-# define BUFFER_SIZE 5
+# define BUFFER_SIZE 2
 
 int get_next_line(int fd, char **line);
 

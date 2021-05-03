@@ -67,7 +67,7 @@ int get_next_line(int fd, char **line)
 		free (tmpandsearch);
 	}
 	// printf("!charsread = %d!\n", charsread);
-	if (charsread > 0 || ft_strlen(leftchars) || ft_strlen(*line))
+	if (ft_strlen(*line))
 		return (1);
 	else
 		return (charsread);
