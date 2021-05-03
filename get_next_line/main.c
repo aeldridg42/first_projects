@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include "../libft/libft.h"
 #include "get_next_line.h"
+
+int get_next_line(int fd, char **line);
 
 int main()
 {
@@ -40,4 +40,8 @@ int main()
     // get_next_line(fd, &text);
     // printf ("%s\n\n", text);
     // free (text);
+    // while (1)
+    // {
+
+    // }
 }
