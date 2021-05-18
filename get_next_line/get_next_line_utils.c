@@ -5,6 +5,8 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (*s++)
 		i++;
 	return (i);
@@ -28,47 +30,40 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+char		*strjoin_v2(char *leftchars, char *buffer)
 {
-	void	*ptr;
+	size_t	count_leftchars;
+	size_t	count_buffer;
+	size_t	length;
+	char	*arr;
 
-	ptr = malloc(size * count);
-	if (!ptr)
+	if (!leftchars && !buffer)
 		return (NULL);
-	ft_memset (ptr, '\0', size * count);
-	return (ptr);
+	count_leftchars = ft_strlen(leftchars);
+	count_buffer = ft_strlen(buffer);
+	length = count_leftchars + count_buffer;
+	arr = (char *)malloc(sizeof(char) * length + 1);
+	if (!arr)
+		return (NULL);
+	ft_memmove(arr, leftchars, count_leftchars);
+	ft_memmove(arr + count_leftchars, buffer, count_buffer);
+	arr[length] = '\0';
+	free(leftchars);
+	return (arr);
 }
 
-void	*ft_memset (void *destination, int c, size_t n)
+int			has_return(char *str)
 {
-	unsigned char	*k;
-	int				i;
-	int				n1;
+	int i;
 
-	k = (unsigned char *) destination;
 	i = 0;
-	n1 = (int) n;
-	while (i < n1)
-		k[i++] = (unsigned char) c;
-	return (destination);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	size_t	i;
-	char	*c;
-
-	if (!s1 || !s2)
-		return (NULL);
-	i = ft_strlen(s1) + ft_strlen(s2);
-	c = (char *)malloc(sizeof(char) * (i + 1));
-	if (!c)
-		return (NULL);
-	i = 0;
-	while (*s1)
-		c[i++] = *s1++;
-	while (*s2)
-		c[i++] = *s2++;
-	c[i] = '\0';
-	return (c);
+	if (!str)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
 }

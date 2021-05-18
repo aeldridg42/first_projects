@@ -12,6 +12,8 @@ int main()
         printf ("%s\n\n", text);
         free (text);
     }
+    printf ("%s\n\n", text);
+    free (text);
     // get_next_line(fd, &text);
     // printf ("%s\n\n", text);
     // free (text);
