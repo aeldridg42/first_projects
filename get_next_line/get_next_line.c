@@ -1,57 +1,74 @@
 #include "get_next_line.h"
 
-char	*get_save(char *save)
+char	*ft_new(char *leftchars, int i)
 {
-	char	*rtn;
-	int		i;
-	int		j;
+	char	*new_lch;
+	int		l;
 
-	i = 0;
-	j = 0;
-	if (!save)
+	l = 0;
+	new_lch = (char *)malloc(sizeof(char) * ((ft_strlen(leftchars) - i) + 1));
+	if (!new_lch)
 		return (NULL);
-	while (save[i] && save[i] != '\n')
-		i++;
-	if (!save[i])
-	{
-		free(save);
-		return (NULL);
-	}
-	rtn = (char *)malloc(sizeof(char) * ((ft_strlen(save) - i) + 1));
-	if (!rtn)
-		return (NULL);
-	i++;
-	while (save[i])
-		rtn[j++] = save[i++];
-	rtn[j] = '\0';
-	free(save);
-	return (rtn);
+	++i;
+	while (leftchars[i])
+		new_lch[l++] = leftchars[i++];
+	new_lch[l] = '\0';
+	return (new_lch);
 }
 
-char	*get_line(char *str)
+char	*ft_leftchars(char *leftchars)
+{
+	char	*new_lchars;
+	int		i;
+
+	i = 0;
+	if (!leftchars)
+		return (NULL);
+	while (leftchars[i] && leftchars[i] != '\n')
+		++i;
+	if (!leftchars[i])
+	{
+		free(leftchars);
+		return (NULL);
+	}
+	new_lchars = ft_new(leftchars, i);
+	if (!new_lchars)
+		return (NULL);
+	free(leftchars);
+	return (new_lchars);
+}
+
+char	*ft_line(char *leftchars)
 {
 	int		i;
 	char	*line;
 
 	i = 0;
-	if (!str)
+	if (!leftchars)
 		return (NULL);
-	while (str[i] && str[i] != '\n')
+	while (leftchars[i] && leftchars[i] != '\n')
 		i++;
 	line = (char *)malloc(sizeof(char) * (i + 1));
 	if (!line)
 		return (NULL);
 	i = 0;
-	while (str[i] && str[i] != '\n')
+	while (leftchars[i] && leftchars[i] != '\n')
 	{
-		line[i] = str[i];
+		line[i] = leftchars[i];
 		i++;
 	}
 	line[i] = '\0';
 	return (line);
 }
 
-int		get_next_line(int fd, char **line)
+int	ft_return(int charsread)
+{
+	if (charsread == 0)
+		return (0);
+	return (1);
+}
+
+int	get_next_line(int fd, char **line)
 {
 	char			*buffer;
 	static char		*leftchars;
@@ -63,20 +80,19 @@ int		get_next_line(int fd, char **line)
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (-1);
-	while (!has_return(leftchars) && charsread != 0)
+	while (!nl_check(leftchars) && charsread != 0)
 	{
-		if ((charsread = read(fd, buffer, BUFFER_SIZE)) == -1)
+		charsread = read(fd, buffer, BUFFER_SIZE);
+		if (charsread == -1)
 		{
 			free(buffer);
 			return (-1);
 		}
 		buffer[charsread] = '\0';
-		leftchars = strjoin_v2(leftchars, buffer);
+		leftchars = strjoin_free(leftchars, buffer);
 	}
 	free(buffer);
-	*line = get_line(leftchars);
-	leftchars = get_save(leftchars);
-	if (charsread == 0)
-		return (0);
-	return (1);
+	*line = ft_line(leftchars);
+	leftchars = ft_leftchars(leftchars);
+	return (ft_return(charsread));
 }

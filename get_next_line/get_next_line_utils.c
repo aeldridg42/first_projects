@@ -30,31 +30,35 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-char		*strjoin_v2(char *leftchars, char *buffer)
+char	*strjoin_free(char *s1, char *s2)
 {
-	size_t	count_leftchars;
-	size_t	count_buffer;
-	size_t	length;
-	char	*arr;
+	size_t	l;
+	size_t	j;
+	size_t	s11;
+	size_t	s21;
+	char	*c;
 
-	if (!leftchars && !buffer)
+	if (!s1 && !s2)
 		return (NULL);
-	count_leftchars = ft_strlen(leftchars);
-	count_buffer = ft_strlen(buffer);
-	length = count_leftchars + count_buffer;
-	arr = (char *)malloc(sizeof(char) * length + 1);
-	if (!arr)
+	l = -1;
+	j = 0;
+	s11 = ft_strlen(s1);
+	s21 = ft_strlen(s2);
+	c = (char *)malloc(sizeof(char) * (s11 + s21 + 1));
+	if (!c)
 		return (NULL);
-	ft_memmove(arr, leftchars, count_leftchars);
-	ft_memmove(arr + count_leftchars, buffer, count_buffer);
-	arr[length] = '\0';
-	free(leftchars);
-	return (arr);
+	while (++l < s11)
+		c[l] = s1[l];
+	while (j < s21)
+		c[l++] = s2[j++];
+	c[l] = '\0';
+	free (s1);
+	return (c);
 }
 
-int			has_return(char *str)
+int	nl_check(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
