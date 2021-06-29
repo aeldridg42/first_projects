@@ -14,7 +14,7 @@ typedef struct	s_flags
 	int		dot;
 }				t_flags;
 
-int				processing_char(char c, t_flags flags);
+int				processing_char(char c, t_flags *flags);
 t_flags			ft_minus_flag(t_flags flags);
 t_flags			ft_digit_flag(char c, t_flags flags);
 t_flags			ft_width_flag(va_list args, t_flags flags);

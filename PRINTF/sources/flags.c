@@ -1,5 +1,16 @@
 #include "../includes/ft_printf.h"
 
+t_flags	ft_initialize(t_flags flags)
+{
+	flags.width = 0;
+	flags.star = 0;
+	flags.type = 0;
+	flags.minus = 0;
+	flags.zero = 0;
+	flags.dot = -1;
+	return (flags);
+}
+
 t_flags	ft_minus_flag(t_flags flags)
 {
 	flags.minus = 1;

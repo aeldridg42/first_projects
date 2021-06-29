@@ -14,17 +14,6 @@ static int	is_flag(int c)
     return (0);
 }
 
-t_flags	ft_initialize(t_flags flags)
-{
-	flags.width = 0;
-	flags.star = 0;
-	flags.type = 0;
-	flags.minus = 0;
-	flags.zero = 0;
-	flags.dot = -1;
-	return (flags);
-}
-
 int	ft_parse(const char *str, int i, t_flags *flags, va_list args)
 {
 	while (str[i])
@@ -72,7 +61,7 @@ int	processing_input(const char *str, va_list args)
 			i = ft_parse(str, ++i, &flags, args);
 			if (is_specificator(str[i]))
 			{
-				check = processing((char)flags.type, flags, args);
+				check = processing(flags.type, flags, args);
 				if (check == -1)
 					return (-1);
 				count += check;
@@ -80,7 +69,9 @@ int	processing_input(const char *str, va_list args)
 			else if (str[i])
 				count += ft_putchar(str[i]);
 		}
-		i++;
+		else if (str[i] == '%' && str[i + 1] == '\0')
+			return (-1);
+		++i;
 	}
 	return (count);
 }

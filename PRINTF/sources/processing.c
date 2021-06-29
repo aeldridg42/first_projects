@@ -1,41 +1,11 @@
 #include "../includes/ft_printf.h"
 
-int	processing_width(int width, int minus, int zero)
-{
-	int count;
-
-	count = 0;
-	while (width > minus)
-	{
-		if (zero)
-			ft_putchar('0');
-		else
-			ft_putchar(' ');
-		width -= 1;
-		count++;
-	}
-	return (count);
-}
-
-int	processing_char(char c, t_flags flags)
-{
-	int count;
-
-	count = 0;
-	if (flags.minus == 1)
-		ft_putchar(c);
-	count = processing_width(flags.width, 1, 0);
-	if (flags.minus == 0)
-		ft_putchar(c);
-	return (count + 1);
-}
-
 static int processing_p1(int c, t_flags flags, va_list args, int count)
 {
 	int check;
 
 	if (c == 'c')
-		count = processing_char(va_arg(args, int), flags);
+		count = processing_char(va_arg(args, int), &flags);
 	else if (c == '%')
 		count += processing_percent(flags);
 	else if (c == 'p')
