@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-char	*ft_new(char *leftchars, int i)
+static char	*ft_new(char *leftchars, int i)
 {
 	char	*new_lch;
 	int		l;
@@ -16,7 +16,7 @@ char	*ft_new(char *leftchars, int i)
 	return (new_lch);
 }
 
-char	*ft_leftchars(char *leftchars)
+static char	*ft_leftchars(char *leftchars)
 {
 	char	*new_lchars;
 	int		i;
@@ -38,7 +38,7 @@ char	*ft_leftchars(char *leftchars)
 	return (new_lchars);
 }
 
-char	*ft_line(char *leftchars)
+static char	*ft_line(char *leftchars)
 {
 	int		i;
 	char	*line;
@@ -61,7 +61,7 @@ char	*ft_line(char *leftchars)
 	return (line);
 }
 
-int	ft_return(int charsread)
+static int	ft_return(int charsread)
 {
 	if (charsread == 0)
 		return (0);
