@@ -15,6 +15,16 @@ int	ft_putchar(char c)
 	return (i);
 }
 
+int ft_putstr(char *str)
+{
+	int i;
+
+	i = 0;
+	while(*str)
+		i += write(1, str++, 1);
+	return (i);
+}
+
 int	ft_putwithprec(char *str, int precision)
 {
 	int i;

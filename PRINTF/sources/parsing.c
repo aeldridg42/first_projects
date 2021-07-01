@@ -14,6 +14,22 @@ static int	is_flag(int c)
     return (0);
 }
 
+static int ft_check(int i, t_flags flags, va_list args, const char *str)
+{
+	int count;
+
+	count = 0;
+	if (is_specificator(str[i]))
+	{
+		count = processing(flags, args);
+		if (count == -1)
+			return (-1);
+	}
+	else if (str[i])
+		count = ft_putchar(str[i]);
+	return (count);
+}
+
 int	ft_parse(const char *str, int i, t_flags *flags, va_list args)
 {
 	while (str[i])
@@ -49,28 +65,19 @@ int	processing_input(const char *str, va_list args)
 
 	i = 0;
 	count = 0;
-	while (1)
+	while (str[i])
 	{
-		flags = ft_initialize(flags);
-		if (!str[i])
-			break ;
-		else if (str[i] != '%')
+		flags = ft_initialize();
+		if (str[i] != '%')
 			count += ft_putchar(str[i]);
 		else if (str[i] == '%' && str[i + 1])
 		{
 			i = ft_parse(str, ++i, &flags, args);
-			if (is_specificator(str[i]))
-			{
-				check = processing(flags.type, flags, args);
-				if (check == -1)
-					return (-1);
-				count += check;
-			}
-			else if (str[i])
-				count += ft_putchar(str[i]);
+			check = ft_check(i, flags, args, str);
+			if (check == -1)
+				return (-1);
+			count += check;
 		}
-		else if (str[i] == '%' && str[i + 1] == '\0')
-			return (-1);
 		++i;
 	}
 	return (count);

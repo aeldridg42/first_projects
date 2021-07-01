@@ -14,6 +14,7 @@ char	*ft_strdup(const char *s1);
 int     ft_strlen(const char *s);
 int     ft_tolower(int c);
 char    *ft_utl_base(unsigned long long number, int base);
+int ft_putstr(char *str);
 
 
 #endif

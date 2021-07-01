@@ -9,7 +9,7 @@ static int	ft_input_int(char *str, int num, t_flags flags)
 		ft_putchar('-');
 	if (flags.dot >= 0)
 		count += processing_width(flags.dot - 1, ft_strlen(str) - 1, 1);
-	count += ft_putwithprec(str, ft_strlen(str));
+	count += ft_putstr(str);
 	return (count);
 }
 
@@ -37,11 +37,11 @@ static int	ft_put_int(char *str, int num, t_flags flags)
 int			processing_int(int i, t_flags flags)
 {
 	int		count;
-	// int		num;
+	int		num;
 	char	*str;
 
 	count = 0;
-	// num = i;
+	num = i;
 	if (flags.dot == 0 && i == 0)
 	{
 		count += processing_width(flags.width, 0, 0);
@@ -50,7 +50,7 @@ int			processing_int(int i, t_flags flags)
 	if (i < 0 && (flags.dot >= 0 || flags.zero == 1) && i != -2147483648)
 	{
 		if (flags.dot <= -1 && flags.zero == 1)
-			ft_putwithprec("-", 1);
+			ft_putchar('-');
 		i *= -1;
 		flags.zero = 1;
 		flags.width--;
@@ -59,7 +59,7 @@ int			processing_int(int i, t_flags flags)
 	str = ft_itoa(i);
 	if (!str)
 		return (-1);
-	count += ft_put_int(str, i, flags); // i -> num
+	count += ft_put_int(str, num, flags);
 	free(str);
 	return (count);
 }
