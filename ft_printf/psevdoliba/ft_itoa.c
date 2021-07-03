@@ -1,6 +1,6 @@
 #include "psevdoliba.h"
 
-static int	count(int n)
+static int	count(long n)
 {
 	int		i;
 
@@ -12,7 +12,7 @@ static int	count(int n)
 		++i;
 		n *= -1;
 	}
-	while (n)
+	while (n > 0)
 	{
 		++i;
 		n /= 10;
@@ -21,12 +21,12 @@ static int	count(int n)
 }
 
 char	*ft_itoa(int n)
-{
+{	
 	long	num;
 	char	*ptr;
 
 	num = n;
-	n = count(num);
+	n = count((long)num);
 	ptr = (char *)malloc(sizeof(char) * (n + 1));
 	if (!ptr)
 		return (NULL);
@@ -52,7 +52,7 @@ char	*ft_uns_itoa(unsigned int n)
 	unsigned long	num;
 	char			*ptr;
 
-	num = n;
+	num = (unsigned long)n;
 	n = count(num);
 	ptr = (char *)malloc(sizeof(char) * (n + 1));
 	if (!ptr)

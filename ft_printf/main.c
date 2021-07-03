@@ -3,16 +3,32 @@
 
 int main()
 {
-    int i;
     unsigned int i2;
-    char *str;
 
-    str = "wqerty";
-    i2 = 5;
-    i2 = 4294967295 + 1 + i2;
-    i = -2147483648;
-    i2 = (unsigned int)i;
-    i2 *= -1;
+    int		a = 0;
+	int		b = -2;
+	char	c = 'a';
+	int		d = 2147483647;
+	int		e = -2147483648;
+	int		f = 42;
+	int		g = 25;
+	int		h = 4200;
+	int		i = 8;
+	int		j = -12;
+	int		k = 123456789;
+	int		l = 0;
+	int		m = -12345678;
+	char	*n = "abcdefghijklmnop";
+	char	*o = "-a";
+	char	*p = "-12";
+	char	*q = "0";
+	char	*r = "%%";
+	char	*s = "-2147483648";
+	char	*t = "0x12345678";
+	char	*u = "-0";
+    // printf("min int = %d\n", e);
+    // e *= -1;
+    // printf("min int = %d\n", e);
     // printf("%d%%%u % s%c%x\n", i, 123456123, "qwerty", 'c', );
     // printf("%1sqwe%crt%uysda\n", "AAA", 'J', 12345);
     // ft_printf("%sqwe%crt%uysda\n", "AAA", 'J', 12346);
@@ -39,6 +55,13 @@ int main()
     // ft_printf("%.*w", -1, 0);
     // printf("%-010s!\n", "qwerty");
     // ft_printf("%-010s!\n", "qwerty");
-    printf("!%.0d, %.0u!\n", 0, 0);
-    ft_printf("!%.0d, %.0u!\n", 0, 0);
+    // ft_printf("%0*.*i, %0*.*d, %0*.*d, %0*.*d, %0*.*d, %0*.*d, %0*.*d, %0*.*d", a, b, i, a, b, j, a, b, k, a, b, l, a, b, m, a, b, c, a, b, e, a, b, d);
+    // printf("\n");
+    // printf("%0*.*i, %0*.*d, %0*.*d, %0*.*d, %0*.*d, %0*.*d, %0*.*d, %0*.*d", a, b, i, a, b, j, a, b, k, a, b, l, a, b, m, a, b, c, a, b, e, a, b, d);
+    // ft_printf("%0*.*d", a, b, -12);
+    // printf("\n");
+    // printf("%0*.*d", a, b, -12);
+    // ft_printf("%0*.*d",0, -10, -12);
+    // printf("\n");
+    // printf("%0*.*d",0, -10, -12);
 }

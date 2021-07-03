@@ -1,4 +1,5 @@
 #include "../includes/ft_printf.h"
+#include <stdio.h>
 
 static int	ft_input_int(char *arr, int num, t_flags flags)
 {
@@ -47,7 +48,7 @@ int	processing_int(int i, t_flags flags)
 		return (count += processing_width(flags.width, 0, 0));
 	if (i < 0 && (flags.prec >= 0 || flags.zero == 1))
 	{
-		if (flags.zero == 1 && flags.prec == -1)
+		if (flags.zero == 1 && flags.prec <= -1)
 			ft_putwithprec("-", 1);
 		i *= -1;
 		flags.zero = 1, --flags.width, ++count;
