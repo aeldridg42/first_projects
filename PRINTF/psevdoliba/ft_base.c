@@ -1,39 +1,38 @@
 #include "psevdoliba.h"
 
-static char *ft_base(unsigned long long number, int base, int count, char *str)
+static char *ft_base(unsigned long number, int base, int i, char *str)
 {
 	while (number != 0)
 	{
 		if ((number % base) < 10)
-			str[count - 1] = (number % base) + 48;
+			str[i - 1] = (number % base) + 48;
 		else
-			str[count - 1] = (number % base) + 55;
+			str[i - 1] = (number % base) + 55;
 		number /= base;
-		count--;
+		i--;
 	}
 	return (str);
 }
 
-char *ft_utl_base(unsigned long long number, int base)
+char *ft_itoa_base(unsigned long number, int base)
 {
-	unsigned long long	temp;
-	int					count;
+	unsigned long	temp;
+	int					i;
 	char				*str;
 
 	temp = number;
-	str = 0;
-	count = 0;
+	i = 0;
 	if (number == 0)
 		return (ft_strdup("0"));
 	while (number != 0)
 	{
 		number /= base;
-		count++;
+		++i;
 	}
-	str = malloc(count + 1);
+	str = malloc(i + 1);
 	if (!str)
 		return (NULL);
-	str[count] = '\0';
-	str = ft_base(temp, base, count, str);
+	str[i] = '\0';
+	str = ft_base(temp, base, i, str);
 	return (str);
 }

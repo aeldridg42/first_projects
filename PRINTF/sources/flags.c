@@ -9,8 +9,7 @@ t_flags	ft_initialize()
 	flags.type = 0;
 	flags.minus = 0;
 	flags.zero = 0;
-	flags.dot = -1;
-	flags.count = 0;
+	flags.prec = -1;
 	return (flags);
 }
 
@@ -42,22 +41,22 @@ t_flags	ft_width_flag(va_list args, t_flags flags)
 	return (flags);
 }
 
-int		ft_dot_flag(const char *str, int start, t_flags *flags, va_list args)
+int		ft_prec_flag(const char *str, int start, t_flags *flags, va_list args)
 {
 	int i;
 
 	i = start + 1;
 	if (str[i] == '*')
 	{
-		flags->dot = va_arg(args, int);
+		flags->prec = va_arg(args, int);
 		++i;
 	}
 	else
 	{
-		flags->dot = 0;
+		flags->prec = 0;
 		while (ft_isdigit(str[i]))
 		{
-			flags->dot = (flags->dot * 10) + (str[i] - 48);
+			flags->prec = (flags->prec * 10) + (str[i] - 48);
 			++i;
 		}
 	}

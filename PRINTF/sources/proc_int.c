@@ -1,65 +1,68 @@
 #include "../includes/ft_printf.h"
 
-static int	ft_input_int(char *str, int num, t_flags flags)
+static int	ft_in_put_part_int(char *d_i, int save_i, t_flags flags)
 {
-	int count;
+	int char_count;
 
-	count = 0;
-	if (flags.dot >= 0 && num < 0 && num != -2147483648)
+	char_count = 0;
+	if (save_i < 0 && flags.prec >= 0)
 		ft_putchar('-');
-	if (flags.dot >= 0)
-		count += processing_width(flags.dot - 1, ft_strlen(str) - 1, 1);
-	count += ft_putstr(str);
-	return (count);
+	if (flags.prec >= 0)
+		char_count += processing_width(flags.prec - 1, ft_strlen(d_i) - 1, 1);
+	char_count += ft_putwithprec(d_i, ft_strlen(d_i));
+	return (char_count);
 }
 
-static int	ft_put_int(char *str, int num, t_flags flags)
+static int	ft_put_part_int(char *d_i, int save_i, t_flags flags)
 {
-	int count;
+	int char_count;
 
-	count = 0;
+	char_count = 0;
 	if (flags.minus == 1)
-		count += ft_input_int(str, num, flags);
-	if (flags.dot >= 0 && flags.dot < ft_strlen(str))
-		flags.dot = ft_strlen(str);
-	if (flags.dot >= 0)
+		char_count += ft_in_put_part_int(d_i, save_i, flags);
+	if (flags.prec >= 0 && flags.prec < ft_strlen(d_i))
+		flags.prec = ft_strlen(d_i);
+	if (flags.prec >= 0)
 	{
-		flags.width -= flags.dot;
-		count += processing_width(flags.width, 0, 0);
+		flags.width -= flags.prec;
+		char_count += processing_width(flags.width, 0, 0);
 	}
 	else
-		count += processing_width(flags.width, ft_strlen(str), flags.zero);
+		char_count += processing_width(flags.width, ft_strlen(d_i), flags.zero);
 	if (flags.minus == 0)
-		count += ft_input_int(str, num, flags);
-	return (count);
+		char_count += ft_in_put_part_int(d_i, save_i, flags);
+	return (char_count);
 }
 
 int			processing_int(int i, t_flags flags)
 {
-	int		count;
-	int		num;
-	char	*str;
+	char	*d_i;
+	int		save_i;
+	int		char_count;
 
-	count = 0;
-	num = i;
-	if (flags.dot == 0 && i == 0)
+	save_i = i;
+	char_count = 0;
+	if (flags.prec == 0 && i == 0)
 	{
-		count += processing_width(flags.width, 0, 0);
-		return (count);
+		char_count += processing_width(flags.width, 0, 0);
+		return (char_count);
 	}
-	if (i < 0 && (flags.dot >= 0 || flags.zero == 1) && i != -2147483648)
+	if (i < 0 && (flags.prec >= 0 || flags.zero == 1))
 	{
-		if (flags.dot <= -1 && flags.zero == 1)
-			ft_putchar('-');
+		if (flags.zero == 1 && flags.prec == -1)
+			ft_putwithprec("-", 1);
 		i *= -1;
 		flags.zero = 1;
 		flags.width--;
-		count++;
+		char_count++;
 	}
-	str = ft_itoa(i);
-	if (!str)
+	if (i == -2147483648)
+		d_i = ft_strdup("2147483648");
+	else
+		d_i = ft_itoa(i);
+	if (d_i == NULL)
 		return (-1);
-	count += ft_put_int(str, num, flags);
-	free(str);
-	return (count);
+	char_count += ft_put_part_int(d_i, save_i, flags);
+	free(d_i);
+	return (char_count);
 }

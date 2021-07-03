@@ -13,8 +13,9 @@ char	*ft_str_tolower(char *str);
 char	*ft_strdup(const char *s1);
 int     ft_strlen(const char *s);
 int     ft_tolower(int c);
-char    *ft_utl_base(unsigned long long number, int base);
+char    *ft_itoa_base(unsigned long number, int base);
 int ft_putstr(char *str);
+char	*ft_strrev(char *str);
 
 
 #endif

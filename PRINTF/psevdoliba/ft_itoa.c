@@ -20,28 +20,6 @@ static int	count(int n)
 	return (i);
 }
 
-static char	*ft_strrev(char *str)
-{
-	int		len;
-	int		i;
-	char	buff;
-
-	len = 0;
-	i = 0;
-	while (str[len])
-		len++;
-	len -= 1;
-	while (i < len)
-	{
-		buff = str[i];
-		str[i] = str[len];
-		str[len] = buff;
-		++i;
-		--len;
-	}
-	return (str);
-}
-
 char	*ft_itoa(int n)
 {
 	long	num;
@@ -71,7 +49,7 @@ char	*ft_itoa(int n)
 
 char	*ft_uns_itoa(unsigned int n)
 {
-	long	num;
+	unsigned long	num;
 	char	*ptr;
 
 	num = n;
@@ -80,11 +58,6 @@ char	*ft_uns_itoa(unsigned int n)
 	if (!ptr)
 		return (NULL);
 	ptr[n] = '\0';
-	if (num < 0)
-	{
-		ptr[n - 1] = '-';
-		num *= -1;
-	}
 	n = 0;
 	if (num == 0)
 		ptr[n++] = '0';

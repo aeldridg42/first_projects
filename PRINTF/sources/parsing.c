@@ -41,7 +41,7 @@ int	ft_parse(const char *str, int i, t_flags *flags, va_list args)
 		if (str[i] == '*')
 			*flags = ft_width_flag(args, *flags);
 		if (str[i] == '.')
-			i = ft_dot_flag(str, i, flags, args);
+			i = ft_prec_flag(str, i, flags, args);
 		if (str[i] == '-')
 			*flags = ft_minus_flag(*flags);
 		if (ft_isdigit(str[i]))
