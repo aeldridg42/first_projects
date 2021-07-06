@@ -2,7 +2,8 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include "../psevdoliba/psevdoliba.h"
+# include <unistd.h>
+# include <stdlib.h>
 
 typedef struct s_flags
 {
@@ -17,8 +18,21 @@ typedef struct s_flags
 t_flags	ft_minus_flag(t_flags flags);
 t_flags	ft_digit_flag(char c, t_flags flags);
 t_flags	ft_width_flag(va_list args, t_flags flags);
-t_flags	ft_initialize(void);
+t_flags	initialize_flags(void);
 
+char	*ft_itoa(int n);
+char	*ft_uns_itoa(unsigned int n);
+char	*ft_str_tolower(char *str);
+char	*ft_strdup(const char *s1);
+char	*ft_itoa_base(unsigned long number, int base);
+char	*ft_strrev(char *str);
+
+int		ft_isdigit(int c);
+int		ft_putchar(char c);
+int		ft_putwithprec(char *str, int precision);
+int		ft_strlen(const char *s);
+int		ft_tolower(int c);
+int		ft_putstr(char *str);
 int		processing_char(char c, t_flags flags);
 int		ft_prec_flag(const char *str, int start, t_flags *flags, va_list args);
 int		processing_x(unsigned int number, int lowercase, t_flags flags);

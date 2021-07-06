@@ -1,6 +1,6 @@
 #include "../includes/ft_printf.h"
 
-t_flags	ft_initialize(void)
+t_flags	initialize_flags(void)
 {
 	t_flags	flags;
 

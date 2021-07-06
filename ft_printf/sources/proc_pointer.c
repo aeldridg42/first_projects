@@ -6,6 +6,8 @@ static int	pointer_input(t_flags flags, char *str)
 	int	count;
 
 	count = ft_putstr("0x");
+	if (flags.zero)
+		count += processing_width(flags.width, ft_strlen(str) + 2, 1);
 	if (flags.prec >= 0)
 	{
 		count += processing_width(flags.prec, ft_strlen(str), 1);
@@ -28,7 +30,8 @@ static int	proc_pointer_p2(int count, t_flags flags, unsigned long num)
 		flags.prec = ft_strlen(str);
 	if (flags.minus == 1)
 		count += pointer_input(flags, str);
-	count += processing_width(flags.width, ft_strlen(str) + 2, 0);
+	if (flags.zero == 0)
+		count += processing_width(flags.width, ft_strlen(str) + 2, 0);
 	if (flags.minus == 0)
 		count += pointer_input(flags, str);
 	free (str);
@@ -38,6 +41,7 @@ static int	proc_pointer_p2(int count, t_flags flags, unsigned long num)
 int	processing_pointer(void *adr, t_flags flags)
 {
 	int				count;
+	int				check;
 	unsigned long	num;
 
 	num = (unsigned long) adr;
@@ -56,6 +60,9 @@ int	processing_pointer(void *adr, t_flags flags)
 		}
 		return (count);
 	}
-	count += proc_pointer_p2(count, flags, num);
+	check = proc_pointer_p2(count, flags, num);
+	if (check == -1)
+		return (-1);
+	count += check;
 	return (count);
 }

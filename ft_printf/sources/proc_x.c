@@ -11,7 +11,7 @@ static int	x_input(char *x, t_flags flags)
 	return (ctr);
 }
 
-static int	ft_x_input(char *arr, t_flags flags)
+static int	proc_x_p2(char *arr, t_flags flags)
 {
 	int	ctr;
 
@@ -47,7 +47,7 @@ int	processing_x(unsigned int input, int lowercase, t_flags flags)
 		return (-1);
 	if (lowercase)
 		arr = ft_str_tolower(arr);
-	ctr = ft_x_input(arr, flags);
+	ctr = proc_x_p2(arr, flags);
 	free (arr);
 	return (ctr);
 }

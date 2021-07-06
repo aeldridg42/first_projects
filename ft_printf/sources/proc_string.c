@@ -1,6 +1,6 @@
 #include "../includes/ft_printf.h"
 
-static int	ft_input_str(char *str, t_flags flags)
+static int	str_input(char *str, t_flags flags)
 {
 	int	count;
 
@@ -25,12 +25,12 @@ int	processing_string(char *str, t_flags flags)
 	if (flags.prec >= 0 && flags.prec > ft_strlen(str))
 		flags.prec = ft_strlen(str);
 	if (flags.minus == 1)
-		count += ft_input_str(str, flags);
+		count += str_input(str, flags);
 	if (flags.prec >= 0)
 		count += processing_width(flags.width, flags.prec, flags.zero);
 	else
 		count += processing_width(flags.width, ft_strlen(str), flags.zero);
 	if (flags.minus == 0)
-		count += ft_input_str(str, flags);
+		count += str_input(str, flags);
 	return (count);
 }

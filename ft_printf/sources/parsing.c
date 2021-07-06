@@ -69,7 +69,7 @@ int	processing_input(const char *str, va_list args)
 	count = 0;
 	while (str[i])
 	{
-		flags = ft_initialize();
+		flags = initialize_flags();
 		if (str[i] != '%')
 			count += ft_putchar(str[i]);
 		else if (str[i] == '%' && str[i + 1])

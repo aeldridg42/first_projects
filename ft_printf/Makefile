@@ -1,6 +1,6 @@
 NAME		=	libftprintf.a
 
-SRCS		= 	ft_printf.c \
+SRCS		= 	base/ft_printf.c \
 				sources/proc_char.c \
 				sources/flags.c \
 				sources/proc_x.c \
@@ -11,10 +11,10 @@ SRCS		= 	ft_printf.c \
 				sources/proc_width.c \
 				sources/processing.c \
 				sources/parsing.c \
-				psevdoliba/ft_base.c \
-				psevdoliba/ft_help.c \
-				psevdoliba/ft_help1.c \
-				psevdoliba/ft_itoa.c \
+				help_functions/ft_itoa_base.c \
+				help_functions/ft_help.c \
+				help_functions/ft_help1.c \
+				help_functions/ft_itoa.c \
 
 OBJS		= 	${SRCS:.c=.o}
 
