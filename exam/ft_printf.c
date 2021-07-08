@@ -87,6 +87,7 @@ static void ft_printint(long num)
     {
         minus = 1;
         num *= -1;
+        g_width--;
     }
     str = ft_itoa_base(num, 10);
     len = ft_strlen(str);
@@ -154,7 +155,7 @@ int ft_printf(const char *format, ...)
             }
             else if(format[i] == 'd')
             {
-                ft_printint(va_arg(parg, long));
+                ft_printint(va_arg(parg, int));
                 ++i;
             }
             else if(format[i] == 'x')
@@ -170,4 +171,11 @@ int ft_printf(const char *format, ...)
     }
     va_end(parg);
     return (g_res);
+}
+
+int main()
+{
+    int i = -12515;
+    printf("|%10.8d|\n", i);
+    ft_printf("|%10.8d|\n", i);
 }
