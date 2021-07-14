@@ -68,6 +68,8 @@ int check_line(t_data *check)
 	int i2;
 	int count;
 	int count2;
+	int player = 0;
+	int exitcount = 0;
 
 	i = 0, i2 = 0, count = 0;
 	while(check->map.map[i][i2]) {
@@ -79,13 +81,26 @@ int check_line(t_data *check)
 	++i;
 	while(check->map.map[i])
 	{
-		i2 = 0;
+		i2 = -1;
 		count2 = 0;
-		while(check->map.map[i][i2++])
-			count2++;
+		while(check->map.map[i][++i2]){
+		if(check->map.map[i][i2] == 'P')
+			player++;
+		if(check->map.map[i][i2] == 'E')
+			exitcount++;
+		count2++;
+		}
 		if (count != count2)
-			return (-1);
+		{
+			printf("Wrong size map! Error\n");
+			exit (0);	
+		}
 		++i;
+	}
+	if (player != 1 || exitcount != 1)
+	{
+		printf("Something went wrong! Error\n");
+		exit (0);	
 	}
 	printf("!count123 = %d!\n", count);
 	return (count);
