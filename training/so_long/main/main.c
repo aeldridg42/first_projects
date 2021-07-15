@@ -6,6 +6,8 @@
 typedef struct s_player {
 	int p_y;
     int p_x;
+	int e_y;
+	int e_x;
 }				t_player;
 
 typedef struct	s_data {
@@ -13,6 +15,8 @@ typedef struct	s_data {
 	void	*img2;
 	void	*img3;
 	void	*img4;
+	void	*pleft;
+	void	*exit2;
 	void	*spaceimg;
 	void	*enemy1;
 	void	*enemy2;
@@ -68,8 +72,6 @@ int check_line(t_data *check)
 	int i2;
 	int count;
 	int count2;
-	int player = 0;
-	int exitcount = 0;
 
 	i = 0, i2 = 0, count = 0;
 	while(check->map.map[i][i2]) {
@@ -83,13 +85,8 @@ int check_line(t_data *check)
 	{
 		i2 = -1;
 		count2 = 0;
-		while(check->map.map[i][++i2]){
-		if(check->map.map[i][i2] == 'P')
-			player++;
-		if(check->map.map[i][i2] == 'E')
-			exitcount++;
-		count2++;
-		}
+		while(check->map.map[i][++i2])
+			count2++;
 		if (count != count2)
 		{
 			printf("Wrong size map! Error\n");
@@ -97,14 +94,50 @@ int check_line(t_data *check)
 		}
 		++i;
 	}
-	if (player != 1 || exitcount != 1)
-	{
-		printf("Something went wrong! Error\n");
-		exit (0);	
-	}
 	printf("!count123 = %d!\n", count);
 	return (count);
 }
+
+// void check_map(t_data *check)
+// {
+// 	int player;
+// 	int exitcount;
+// 	int col_count;
+// 	int i;
+// 	int i2;
+
+// 	player = 0, exitcount = 0, col_count = 0, i = 0, i2 = 0;
+// 	while(check->map.map[i])
+// 	{
+// 		i2 = 0;
+// 		while(check->map.map[i][i2])
+// 		{
+// 			if(check->map.map[i][i2] == 'P')
+// 				player++;
+// 			if(check->map.map[i][i2] == 'E')
+// 				exitcount++;
+// 			if(check->map.map[i][i2] == 'C')
+// 				col_count++;
+// 			i2++;
+// 		}
+// 		i++;
+// 	}
+// 	i = 0, i2 = 0;
+// 	while(check->map.map[0][i2] == 1 && check->map.map[0][i2])
+// 		i2++;
+// 	if(check->map.map[0][i2] != '\0')
+// 	{
+// 		printf("Map Error!");
+// 		exit (0);
+// 	}
+// 	while(check->map.map[check->map.lenght][i] == 1 && check->map.map[check->map.lenght])
+// 		i++;
+// 	if(check->map.map[check->map.lenght][i] != '\0')
+// 	{
+// 		printf("Map Error!");
+// 		exit (0);
+// 	}
+// }
 
 int parser(char **argv, t_data *check)
 {
@@ -128,6 +161,7 @@ int parser(char **argv, t_data *check)
     }
     check->map.map[i] = NULL;
 	check_line(check);
+	// check_map(check);
     return 0;
 }
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -140,28 +174,24 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void moveright(t_data *check)
 {
-	if (check->map.map[check->player.p_y][check->player.p_x+1] == 'E'){
-		mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x-1) * 63, check->player.p_y * 63);
-		mlx_put_image_to_window(check->mlx, check->win, check->img, check->player.p_x * 63, check->player.p_y * 63);
-		if (check->map.collectable == 0)
-		{
-			printf("You WON!\n");
-			exit (0);
-		}
+	if (check->map.map[check->player.p_y][check->player.p_x+1] == 'E')
+	{
+		printf("You WON!\n");
+		exit (0);
 	}
 	else if (check->map.map[check->player.p_y][check->player.p_x+1] == '0'){
-		mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x) * 63, check->player.p_y * 63);
-		mlx_put_image_to_window(check->mlx, check->win, check->img, (check->player.p_x+1) * 63, check->player.p_y * 63);
+		mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x) * 50, check->player.p_y * 50);
+		mlx_put_image_to_window(check->mlx, check->win, check->img, (check->player.p_x+1) * 50, check->player.p_y * 50);
 	}
 	else if (check->map.map[check->player.p_y][check->player.p_x+1] == 'C'){
-		mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x) * 63, check->player.p_y * 63);
-		mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x+1) * 63, check->player.p_y * 63);
-		mlx_put_image_to_window(check->mlx, check->win, check->img, (check->player.p_x+1) * 63, check->player.p_y * 63);
+		mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x) * 50, check->player.p_y * 50);
+		mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x+1) * 50, check->player.p_y * 50);
+		mlx_put_image_to_window(check->mlx, check->win, check->img, (check->player.p_x+1) * 50, check->player.p_y * 50);
 	}
 	else{
-		mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 63, check->player.p_y * 63);
-		mlx_put_image_to_window(check->mlx, check->win, check->img, check->player.p_x * 63, check->player.p_y * 63);
-		mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x-1) * 63, check->player.p_y * 63);
+		mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 50, check->player.p_y * 50);
+		mlx_put_image_to_window(check->mlx, check->win, check->img, check->player.p_x * 50, check->player.p_y * 50);
+		mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x-1) * 50, check->player.p_y * 50);
 	}
 	printf("Your moves - %d\n", check->countmoves+=1);
 }
@@ -169,48 +199,174 @@ void moveright(t_data *check)
 void moveleft(t_data *check)
 {
 	if (check->map.map[check->player.p_y][check->player.p_x-1] == '0'){
-		mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x) * 63, check->player.p_y * 63);
-		mlx_put_image_to_window(check->mlx, check->win, check->img, (check->player.p_x-1) * 63, check->player.p_y * 63);
+		mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x) * 50, check->player.p_y * 50);
+		mlx_put_image_to_window(check->mlx, check->win, check->pleft, (check->player.p_x-1) * 50, check->player.p_y * 50);
 		// mlx_string_put(check.mlx, check.win, 0, 0, 0xFF, "0");
 		printf("Your moves - %d\n", check->countmoves+=1);
 	}
-	// else{
-	// 	mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 63, check->player.p_y * 63);
-	// 	mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x+1) * 63, check->player.p_y * 63);
-	// 	mlx_put_image_to_window(check->mlx, check->win, check->img, check->player.p_x * 63, check->player.p_y * 63);
-	// }
+	if (check->map.map[check->player.p_y][check->player.p_x-1] == 'C'){
+		mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x-1) * 50, check->player.p_y * 50);
+		mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.p_x) * 50, check->player.p_y * 50);
+		mlx_put_image_to_window(check->mlx, check->win, check->pleft, (check->player.p_x-1) * 50, check->player.p_y * 50);
+	}
+	if (check->map.map[check->player.p_y][check->player.p_x-1] == 'E')
+	{
+		printf("You WON!\n");
+		exit (0);
+	}
 }
 
 void moveup(t_data *check)
 {
 	if (check->map.map[check->player.p_y-1][check->player.p_x] == '0'){
-		mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 63, check->player.p_y * 63);
-		mlx_put_image_to_window(check->mlx, check->win, check->img, check->player.p_x * 63, (check->player.p_y-1) * 63);
-		printf("Your moves - %d\n", check->countmoves+=1);
+		mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 50, check->player.p_y * 50);
+		mlx_put_image_to_window(check->mlx, check->win, check->img, check->player.p_x * 50, (check->player.p_y-1) * 50);
 	}
-	// else{
-	// 	mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 63, check->player.p_y * 63);
-	// 	mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 63, (check->player.p_y + 1) * 63);
-	// 	mlx_put_image_to_window(check->mlx, check->win, check->img, check->player.p_x * 63, check->player.p_y * 63);
-	// }
+	else if (check->map.map[check->player.p_y-1][check->player.p_x] == 'C'){
+		mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 50, (check->player.p_y-1) * 50);
+		mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 50, check->player.p_y * 50);
+		mlx_put_image_to_window(check->mlx, check->win, check->img, check->player.p_x * 50, (check->player.p_y-1) * 50);
+	}
+	else if (check->map.map[check->player.p_y-1][check->player.p_x] == 'E')
+	{
+		printf("You WON!\n");
+		exit (0);
+	}
+	printf("Your moves - %d\n", check->countmoves+=1);
 }
 
 void movedown(t_data *check)
 {
-	if (check->map.map[check->player.p_y+1][check->player.p_x] == '0'){
-		mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 63, check->player.p_y * 63);
-		mlx_put_image_to_window(check->mlx, check->win, check->img, check->player.p_x * 63, (check->player.p_y+1) * 63);
+	if (check->map.map[check->player.p_y+1][check->player.p_x] != '1')
+	{
+		if (check->map.map[check->player.p_y+1][check->player.p_x] == '0')
+		{
+			mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 50, check->player.p_y * 50);
+			mlx_put_image_to_window(check->mlx, check->win, check->img, check->player.p_x * 50, (check->player.p_y+1) * 50);
+		}
+		else if (check->map.map[check->player.p_y+1][check->player.p_x] == 'C')
+		{
+			mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 50, (check->player.p_y+1) * 50);
+			mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 50, check->player.p_y * 50);
+			mlx_put_image_to_window(check->mlx, check->win, check->img, check->player.p_x * 50, (check->player.p_y+1) * 50);
+		}
+		else if (check->map.map[check->player.p_y+1][check->player.p_x] == 'E')
+		{
+			printf("You WON!\n");
+			exit (0);
+		}
 		printf("Your moves - %d\n", check->countmoves+=1);
 	}
-	// }else{
-	// 	mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 63, check->player.p_y * 63);
-	// 	mlx_put_image_to_window(check->mlx, check->win, check->img2, check->player.p_x * 63, (check->player.p_y - 1) * 63);
-	// 	mlx_put_image_to_window(check->mlx, check->win, check->img, check->player.p_x * 63, check->player.p_y * 63);
-	// }
+}
+
+void keycode_d(t_data *check)
+{
+	if (check->map.map[check->player.p_y][check->player.p_x + 1] == 'E')
+	{
+		if(check->map.collectable == 0)
+		moveright(check);
+	}
+	else if (check->map.map[check->player.p_y][check->player.p_x + 1] == 'C')
+	{
+		moveright(check);
+		check->map.map[check->player.p_y][check->player.p_x] = '0';
+		check->map.map[check->player.p_y][check->player.p_x + 1] = 'P';
+		check->player.p_x += 1;
+		check->map.collectable -= 1;
+	}
+	else if (check->map.map[check->player.p_y][check->player.p_x + 1] == '0'){
+		moveright(check);
+		check->map.map[check->player.p_y][check->player.p_x] = '0';
+		check->map.map[check->player.p_y][check->player.p_x + 1] = 'P';
+		check->player.p_x += 1;
+	}
+}
+
+void keycode_a(t_data *check)
+{
+	if (check->map.map[check->player.p_y][check->player.p_x - 1] == '0')
+	{
+		moveleft(check);
+		check->map.map[check->player.p_y][check->player.p_x] = '0';
+		check->map.map[check->player.p_y][check->player.p_x - 1] = 'P';
+		check->player.p_x -= 1;
+	}
+	else if (check->map.map[check->player.p_y][check->player.p_x - 1] == 'C')
+	{
+		moveleft(check);
+		check->map.map[check->player.p_y][check->player.p_x] = '0';
+		check->map.map[check->player.p_y][check->player.p_x - 1] = 'P';
+		check->player.p_x -= 1;
+		check->map.collectable -= 1;
+	}
+	else if (check->map.map[check->player.p_y][check->player.p_x - 1] == 'E'){
+		if(check->map.collectable == 0)
+			moveleft(check);
+	}
+}
+
+void keycode_s(t_data *check)
+{
+	if (check->map.map[check->player.p_y+1][check->player.p_x] == '0')
+	{
+		movedown(check);
+		check->map.map[check->player.p_y][check->player.p_x] = '0';
+		check->map.map[check->player.p_y+1][check->player.p_x] = 'P';
+		check->player.p_y += 1;
+	}
+	else if (check->map.map[check->player.p_y+1][check->player.p_x] == 'C')
+	{
+		movedown(check);
+		check->map.map[check->player.p_y][check->player.p_x] = '0';
+		check->map.map[check->player.p_y+1][check->player.p_x] = 'P';
+		check->player.p_y += 1;
+		check->map.collectable -= 1;
+	}
+	else if (check->map.map[check->player.p_y+1][check->player.p_x] == 'E')
+		if (check->map.collectable == 0)
+			movedown(check);
+	
+}
+
+void keycode_w(t_data *check)
+{
+	if(check->map.map[check->player.p_y - 1][check->player.p_x] == '0')
+	{
+		moveup(check);
+		check->map.map[check->player.p_y][check->player.p_x] = '0';
+		check->map.map[check->player.p_y-1][check->player.p_x] = 'P';
+		check->player.p_y -= 1;
+	}
+	else if(check->map.map[check->player.p_y - 1][check->player.p_x] == 'C')
+	{
+		moveup(check);
+		check->map.map[check->player.p_y][check->player.p_x] = '0';
+		check->map.map[check->player.p_y-1][check->player.p_x] = 'P';
+		check->player.p_y -= 1;
+		check->map.collectable -= 1;
+	}
+	else if (check->map.map[check->player.p_y-1][check->player.p_x] == 'E'){
+		if (check->map.collectable == 0)
+			moveup(check);
+	}else if (check->map.map[check->player.p_y-1][check->player.p_x] == 'W')
+	{
+		printf("YOU LOST! HA-HA\n");
+		exit (0);
+	}
+	
+}
+
+void draw_exit(t_data *check)
+{
+	mlx_put_image_to_window(check->mlx, check->win, check->img2, (check->player.e_x) * 50, check->player.e_y * 50);
+	mlx_put_image_to_window(check->mlx, check->win, check->exit2, (check->player.e_x) * 50, check->player.e_y * 50);
 }
 
 int	key_hook(int keycode, t_data *check)
 {
+	int i;
+
+	i = 0;
 	if (keycode == 53)
 	{
 		printf("closing...\n");
@@ -218,61 +374,18 @@ int	key_hook(int keycode, t_data *check)
 		exit(0);
 	}
 	if (keycode == 2)
-	{
-		if (check->map.map[check->player.p_y][check->player.p_x + 1] == 'E')
-		{
-			if(check->map.collectable == 0)
-				moveright(check);
-		}
-		else if (check->map.map[check->player.p_y][check->player.p_x + 1] == 'C'){
-			moveright(check);
-			check->map.map[check->player.p_y][check->player.p_x] = '0';
-			check->map.map[check->player.p_y][check->player.p_x + 1] = 'P';
-			check->player.p_x += 1;
-			check->map.collectable -= 1;
-			printf("COLLECTABLE  = %d\n", check->map.collectable);
-		}
-		else if (check->map.map[check->player.p_y][check->player.p_x + 1] == '0'){
-			moveright(check);
-			check->map.map[check->player.p_y][check->player.p_x] = '0';
-			check->map.map[check->player.p_y][check->player.p_x + 1] = 'P';
-			check->player.p_x += 1;
-		}
-	}
+		keycode_d(check);
 	if (keycode == 1)
+		keycode_s(check);
+	if (keycode == 0)
+		keycode_a(check);
+	if (keycode == 13)
+		keycode_w(check);
+	if (check->map.collectable == 0 && i == 0)
 	{
-		// check->x += 640;
-		// check->y += 640;
-		// mlx_clear_window(check->mlx, check->win);
-		if (check->map.map[check->player.p_y+1][check->player.p_x] == '0')
-		{
-			movedown(check);
-			check->map.map[check->player.p_y][check->player.p_x] = '0';
-			check->map.map[check->player.p_y+1][check->player.p_x] = 'P';
-			check->player.p_y += 1;
-		}
-		// check->color -= 1;
-		// printf("!%d, %d!\n", check->x1, check->x2);
+		i = 1;
+		draw_exit(check);
 	}
-	if (keycode == 0){
-		if (check->map.map[check->player.p_y][check->player.p_x - 1] == '0'){
-			moveleft(check);
-			check->map.map[check->player.p_y][check->player.p_x] = '0';
-			check->map.map[check->player.p_y][check->player.p_x - 1] = 'P';
-			check->player.p_x -= 1;
-		}
-	}
-	if (keycode == 13){
-		if(check->map.map[check->player.p_y - 1][check->player.p_x] == '0'){
-			moveup(check);
-			check->map.map[check->player.p_y][check->player.p_x] = '0';
-			check->map.map[check->player.p_y-1][check->player.p_x] = 'P';
-			check->player.p_y -= 1;
-		}
-	}
-	int i = 0;
-	while(check->map.map[i])
-		printf("%s\n", check->map.map[i++]);
 	return(0);
 }
 
@@ -340,25 +453,32 @@ void zarisovka(t_map *map, t_data *check)
 		i2 = 0;
 		while(check->map.map[i][i2]) {
 			if (check->map.map[i][i2] == 'P'){
-				mlx_put_image_to_window(check->mlx, check->win, check->img2, i2 * 63, i * 63);
-				mlx_put_image_to_window(check->mlx, check->win, check->img, i2 * 63, i * 63);
+				mlx_put_image_to_window(check->mlx, check->win, check->img2, i2 * 50, i * 50);
+				mlx_put_image_to_window(check->mlx, check->win, check->img, i2 * 50, i * 50);
 				check->player.p_x = i2;
 				check->player.p_y = i;
 			}
 			else if(check->map.map[i][i2] == '1'){
-				mlx_put_image_to_window(check->mlx, check->win, check->img2, i2 * 63, i * 63);
-				mlx_put_image_to_window(check->mlx, check->win, check->img3, i2 * 64, i * 64);
+				mlx_put_image_to_window(check->mlx, check->win, check->img2, i2 * 50, i * 50);
+				mlx_put_image_to_window(check->mlx, check->win, check->img3, i2 * 50, i * 50);
+			}
+			else if(check->map.map[i][i2] == 'W'){
+				mlx_put_image_to_window(check->mlx, check->win, check->img2, i2 * 50, i * 50);
+				mlx_put_image_to_window(check->mlx, check->win, check->enemy1, i2 * 50, i * 50);
 			}
 			else if(check->map.map[i][i2] == 'C'){
 				check->map.collectable += 1;
-				mlx_put_image_to_window(check->mlx, check->win, check->img2, i2 * 63, i * 63);
-				mlx_put_image_to_window(check->mlx, check->win, check->img4, i2 * 64, i * 64);
+				mlx_put_image_to_window(check->mlx, check->win, check->img2, i2 * 50, i * 50);
+				mlx_put_image_to_window(check->mlx, check->win, check->img4, i2 * 50, i * 50);
 			}
 			else if(check->map.map[i][i2] == 'E'){
-				mlx_put_image_to_window(check->mlx, check->win, check->spaceimg, i2 * 63, i * 63);
+				mlx_put_image_to_window(check->mlx, check->win, check->img2, i2 * 50, i * 50);
+				mlx_put_image_to_window(check->mlx, check->win, check->spaceimg, i2 * 50, i * 50);
+				check->player.e_x = i2;
+				check->player.e_y = i;
 			}
 			else
-				mlx_put_image_to_window(check->mlx, check->win, check->img2, i2 * 63, i * 63);
+				mlx_put_image_to_window(check->mlx, check->win, check->img2, i2 * 50, i * 50);
 			printf("%c ", check->map.map[i][i2]);
 			i2++;
 		}
@@ -383,8 +503,8 @@ int	main(int argc, char **argv)
 	check.color = 0xFFFFFF;
 	check.ilnur = 0;
 	check.countmoves = 0;
-	// check.x = 640;
-	// check.y = 640;
+	// check.x = 500;
+	// check.y = 500;
 	parser(argv, &check);
 	// int i = 0;
 	// while(check.map.map[i])
@@ -392,14 +512,16 @@ int	main(int argc, char **argv)
 	// check.linesize = map.linesize;
 	// check.lenght = map.lenght;
 	check.mlx = mlx_init();
-	// printf("!!%d, %d,(%d, %d)!!\n", map.linesize * 63, (map.lenght-2) * 63, map.linesize, map.lenght - 2);
-	check.win = mlx_new_window(check.mlx, check.map.linesize * 63, (check.map.lenght-1) * 63, "Check123");
+	// printf("!!%d, %d,(%d, %d)!!\n", map.linesize * 50, (map.lenght-2) * 50, map.linesize, map.lenght - 2);
+	check.win = mlx_new_window(check.mlx, check.map.linesize * 50, (check.map.lenght-1) * 50 -15, "Check123");
 	check.img2 = mlx_xpm_file_to_image(check.mlx, "grass.xpm", &check.width, &check.height);
-	check.img = mlx_xpm_file_to_image(check.mlx, "13.xpm", &check.width, &check.height);
-	check.img3 = mlx_xpm_file_to_image(check.mlx, "2.xpm", &check.width, &check.height);
-	check.img4 = mlx_xpm_file_to_image(check.mlx, "planeta.xpm", &check.width, &check.height);
-	check.spaceimg = mlx_xpm_file_to_image(check.mlx, "space.xpm", &check.width, &check.height);
-	// check.enemy1 = mlx_xpm_file_to_image(check.mlx, "fotki/enemy1.xpm", &check.width, &check.height);
+	check.img = mlx_xpm_file_to_image(check.mlx, "fotki/heroright.xpm", &check.width, &check.height);
+	check.img3 = mlx_xpm_file_to_image(check.mlx, "fotki/bigtree.xpm", &check.width, &check.height);
+	check.img4 = mlx_xpm_file_to_image(check.mlx, "fotki/carrot.xpm", &check.width, &check.height);
+	check.exit2 = mlx_xpm_file_to_image(check.mlx, "fotki/openexit.xpm", &check.width, &check.height);
+	check.spaceimg = mlx_xpm_file_to_image(check.mlx, "fotki/closedexit.xpm", &check.width, &check.height);
+	check.pleft = mlx_xpm_file_to_image(check.mlx, "fotki/heroleft.xpm", &check.width, &check.height);
+	check.enemy1 = mlx_xpm_file_to_image(check.mlx, "fotki/cocacola.xpm", &check.width, &check.height);
 	// check.enemy2 = mlx_xpm_file_to_image(check.mlx, "fotki/enemy2.xpm", &check.width, &check.height);
 	// check.enemy3 = mlx_xpm_file_to_image(check.mlx, "fotki/enemy3.xpm", &check.width, &check.height);
 	// check.enemy4 = mlx_xpm_file_to_image(check.mlx, "fotki/enemy4.xpm", &check.width, &check.height);

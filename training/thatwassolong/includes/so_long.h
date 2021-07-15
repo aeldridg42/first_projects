@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
 # include <mlx.h>
 # include <stdio.h>
@@ -29,18 +29,23 @@ typedef struct	s_images {
 	void	*o_exit;
 	void	*c_exit;
 	void	*tree;
+    void    *cola;
+    void    *player;
 }				t_images;
 
-typedef struct	s_mlxs {
+typedef struct	s_mlx {
 	void    *mlx;
 	void    *win;
-}				t_mlxs;
+}				t_mlx;
 
 typedef struct	s_game {
-	t_mlxs		mlxs;
+	t_mlx		mlx;
 	t_images	images;
 	t_player	player;
 	t_map		map;
+    int         countmoves;
+    int         exitflag;
+    char        *num;
 }				t_game;
 
 #endif

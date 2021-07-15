@@ -1,0 +1,1 @@
+gcc main.c -lmlx -framework OpenGL -framework AppKit ft_printf/libftprintf.a get_next_line/*.c
