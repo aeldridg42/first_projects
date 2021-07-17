@@ -108,17 +108,14 @@ int	key_hook(int keycode, t_game *game)
 		keycode_a(game);
 	if (keycode == 13)
 		keycode_w(game);
-	if (game->map.collectable == 0 && game->count.exitflag)
-	{
+	if (game->map.collectable == 0 && !game->count.exitflag)
 		game->count.exitflag = 1;
-		draw_exit(game);
-	}
 	game->num = ft_itoa(game->count.countmoves);
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
-		game->images.grass, 0, 0);
+		game->images.wall, 0 - 21, 0);
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
-		game->images.tree, 0, 0);
-	mlx_string_put(game->mlx.mlx, game->mlx.win, 0, 0, 0xFF, game->num);
+		game->images.wall, SCALE - 21, 0);
+	mlx_string_put(game->mlx.mlx, game->mlx.win, 0, 0, 0x00FF00, game->num);
 	free (game->num);
 	return (0);
 }
