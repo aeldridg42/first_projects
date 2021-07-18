@@ -24,25 +24,35 @@ CC			= 	gcc
 
 CFLAGS		= 	-Wall -Wextra -Werror
 
+MLX 		= 	-lmlx -framework OpenGL -framework AppKit
+
 INCLUDES	= 	includes
 
-INCLUDES2	=	get_next_line
+RM			= 	rm -rf
 
 all: 			$(NAME)
 
+bonus:			${NAME}
+
 $(NAME): 		$(OBJS)
-				@$(MAKE) -C ./minilibx__mms_20200219
-				@$(MAKE) -C ./minilibx__opengl_20191021
+				@$(MAKE) -C ./minilibx_mms_20200219
+				@$(MAKE) -C ./minilibx_opengl_20191021
 				@$(MAKE) -C ./ft_printf
-				@mv minilibx__mms_20200219/libmlx.dylib .
-				@mv minilibx__opengl_20191021/libmlx.a .
-				@${CC} ${OBJS} ${CFLAGS} ./ft_printf/libftprintf.a libmlx.dylib libmlx.a -o ${NAME}
+				@mv minilibx_mms_20200219/libmlx.dylib .
+				@mv minilibx_opengl_20191021/libmlx.a .
+				@${CC} ${OBJS} ${CFLAGS} ${MLX} ./ft_printf/libftprintf.a libmlx.dylib libmlx.a -o ${NAME}
+
 clean:
-				rm -rf ${OBJS} 
+				@$(MAKE) -C ./ft_printf fclean
+				@$(MAKE) -C ./minilibx_mms_20200219 clean
+				@$(MAKE) -C ./minilibx_opengl_20191021 clean
+				${RM} ${OBJS} 
 
 fclean:			clean
-				rm -rf ${NAME}
+				${RM} ${NAME}
+				${RM} libmlx.dylib
+				${RM} libmlx.a
 
 re:				fclean all
 
-.PHONY:			all clean fclean re
+.PHONY:			all clean fclean re bonus

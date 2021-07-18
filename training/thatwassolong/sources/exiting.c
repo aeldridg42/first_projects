@@ -58,7 +58,7 @@ void	winning(t_game *game)
 {
 	ft_free(game);
 	mlx_destroy_window(game->mlx.mlx, game->mlx.win);
-	ft_printf("You WON! It took %d moves!\n", game->count.countmoves + 1);
+	ft_printf("Your moves - %d\nYou WON!\n", game->count.countmoves + 1);
 	exit (0);
 }
 
@@ -66,7 +66,7 @@ void	loosing(t_game *game)
 {
 	ft_free(game);
 	mlx_destroy_window(game->mlx.mlx, game->mlx.win);
-	ft_printf("You LOST! It took %d moves! Such a shame...\n",
+	ft_printf("Your moves - %d\nYou LOST! Such a shame...\n",
 		game->count.countmoves + 1);
 	exit (0);
 }
