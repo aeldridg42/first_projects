@@ -2,6 +2,8 @@
 
 void	keycode_d(t_game *game)
 {
+	game->count.counthero = 0;
+	game->players.heroflag = 2;
 	if (game->map.map[game->players.p_y][game->players.p_x + 1] == 'C')
 	{
 		moveright(game);
@@ -21,11 +23,13 @@ void	keycode_d(t_game *game)
 		loosing(game);
 	else if (game->map.map[game->players.p_y][game->players.p_x + 1] == 'E')
 		if (game->map.collectable == 0)
-			moveright(game);
+			winning(game);
 }
 
 void	keycode_a(t_game *game)
 {
+	game->count.counthero = 0;
+	game->players.heroflag = 0;
 	if (game->map.map[game->players.p_y][game->players.p_x - 1] == '0')
 	{
 		moveleft(game);
@@ -45,11 +49,13 @@ void	keycode_a(t_game *game)
 		loosing(game);
 	else if (game->map.map[game->players.p_y][game->players.p_x - 1] == 'E')
 		if (game->map.collectable == 0)
-			moveleft(game);
+			winning(game);
 }
 
 void	keycode_s(t_game *game)
 {
+	game->count.counthero = 0;
+	game->players.heroflag = 1;
 	if (game->map.map[game->players.p_y + 1][game->players.p_x] == '0')
 	{
 		movedown(game);
@@ -69,11 +75,13 @@ void	keycode_s(t_game *game)
 		loosing(game);
 	else if (game->map.map[game->players.p_y + 1][game->players.p_x] == 'E')
 		if (game->map.collectable == 0)
-			movedown(game);
+			winning(game);
 }
 
 void	keycode_w(t_game *game)
 {
+	game->count.counthero = 0;
+	game->players.heroflag = 3;
 	if (game->map.map[game->players.p_y - 1][game->players.p_x] == '0')
 	{
 		moveup(game);
@@ -93,7 +101,7 @@ void	keycode_w(t_game *game)
 		loosing(game);
 	else if (game->map.map[game->players.p_y - 1][game->players.p_x] == 'E')
 		if (game->map.collectable == 0)
-			moveup(game);
+			winning(game);
 }
 
 int	key_hook(int keycode, t_game *game)
@@ -115,7 +123,7 @@ int	key_hook(int keycode, t_game *game)
 		game->images.wall, 0 - 21, 0);
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
 		game->images.wall, SCALE - 21, 0);
-	mlx_string_put(game->mlx.mlx, game->mlx.win, 0, 0, 0x00FF00, game->num);
+	mlx_string_put(game->mlx.mlx, game->mlx.win, 10, 5, 0x00FF00, game->num);
 	free (game->num);
 	return (0);
 }

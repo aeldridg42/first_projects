@@ -1,12 +1,15 @@
 #include "../includes/so_long.h"
 
-void	validletter(char i)
+static int	validletter(char i)
 {
 	if (i != '1' && i != '0' && i != 'E' && i != 'W' && i != 'P' && i != 'C')
-		ft_error();
+		return (1);
+	if (i == 'C')
+		return (2);
+	return (0);
 }
 
-void	mapcheck1(t_game *game)
+static void	mapcheck1(t_game *game)
 {
 	int	i;
 	int	i2;
@@ -21,37 +24,44 @@ void	mapcheck1(t_game *game)
 		i2 = -1;
 		while (game->map.map[i][++i2])
 		{
-			validletter(game->map.map[i][i2]);
+			if (validletter(game->map.map[i][i2]) == 1)
+				ft_error(2, game);
+			if (validletter(game->map.map[i][i2]) == 2)
+				game->map.collectable += 1;
 			if (game->map.map[i][i2] == 'P')
 				++p;
 			if (game->map.map[i][i2] == 'E')
 				++e;
 			if (e > 1 || p > 1)
-				ft_error();
+				ft_error(2, game);
 		}
 	}
 }
 
-void	mapcheck2(t_game *game)
+static void	mapcheck2(t_game *game)
 {
 	int	i;
 
 	i = -1;
 	while (game->map.map[0][++i])
 		if (game->map.map[0][i] != '1')
-			ft_error();
+			ft_error(2, game);
 	i = -1;
 	while (game->map.map[++i])
 		if (game->map.map[i][0] != '1')
-			ft_error();
+			ft_error(2, game);
 	i = -1;
 	while (game->map.map[game->map.lenght - 2][++i])
 		if (game->map.map[game->map.lenght - 2][i] != '1')
-			ft_error();
+			ft_error(2, game);
 	i = -1;
 	while (game->map.map[++i])
 		if (game->map.map[i][game->map.linesize - 1] != '1')
-			ft_error();
+			ft_error(2, game);
+	if (game->map.collectable == 0)
+		ft_error(2, game);
+	if (game->map.linesize > 62 || game->map.lenght > 34)
+		ft_error(7, game);
 }
 
 void	parser(char **argv, t_game *game)
@@ -62,17 +72,19 @@ void	parser(char **argv, t_game *game)
 	int		check;
 
 	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		ft_error(3, game);
 	i = 0;
 	check = 1;
 	game_lenght(argv[1], game);
 	game->map.map = (char **)malloc(sizeof(char *) * (game->map.lenght));
 	if (!game->map.map)
-		ft_error();
+		ft_error(5, game);
 	while (check)
 	{
 		check = get_next_line(fd, &line);
 		if (check == -1)
-			ft_error();
+			ft_error(5, game);
 		game->map.map[i++] = line;
 	}
 	game->map.map[i] = NULL;

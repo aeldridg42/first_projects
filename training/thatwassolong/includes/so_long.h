@@ -1,7 +1,6 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # define SCALE 42
-# define SCALE2 42 - 21
 
 # include <mlx.h>
 # include <stdlib.h>
@@ -35,22 +34,34 @@ typedef struct s_pictures {
 	void		*enemy6;
 	void		*enemy7;
 	void		*enemy8;
+	void		*heroleft1;
+	void		*heroleft2;
+	void		*heroleft3;
+	void		*heroleft4;
+	void		*heroup1;
+	void		*heroup2;
+	void		*heroup3;
+	void		*heroup4;
+	void		*herodown1;
+	void		*herodown2;
+	void		*herodown3;
+	void		*herodown4;
 }				t_pictures;
 
 typedef struct s_player {
 	t_pictures	anim;
 	int			p_y;
 	int			p_x;
-	int			e_y;
-	int			e_x;
+	int			heroflag;
 }				t_player;
 
 typedef struct s_count {
 	int			countmoves;
 	int			countanim;
+	int			counthero;
 	int			countanim2;
 	int			exitflag;
-	int checkflag;
+	int			checkflag;
 }				t_count;
 
 typedef struct s_mlx {
@@ -94,17 +105,16 @@ typedef struct s_game {
 	char		*num;
 }				t_game;
 
-void	ft_error(void);
+int		ft_close(int keycode, t_game game);
+void	ft_error(int i, t_game *game);
 void	ft_free(t_game *game);
-int		ft_close(int			keycode, t_game game);
 void	winning(t_game *game);
 void	loosing(t_game *game);
-void	game_lenght(char *argv, t_game *game);
+
 int		game_line(t_game *game);
-void	validletter(char i);
-void	mapcheck1(t_game *game);
-void	mapcheck2(t_game *game);
+void	game_lenght(char *argv, t_game *game);
 void	parser(char **argv, t_game *game);
+
 void	moveright(t_game *game);
 void	moveleft(t_game *game);
 void	moveup(t_game *game);
@@ -114,13 +124,18 @@ void	keycode_a(t_game *game);
 void	keycode_w(t_game *game);
 void	keycode_s(t_game *game);
 int		key_hook(int keycode, t_game *game);
-void	draw1(t_game *game, int	i, int i2);
-void	draw3(t_game *game, int	i, int i2);
-void	mapdraw(t_game *game);
-int		render_next_frame(t_game *game);
+
 void	getimage(t_game *game);
+
+int		render_next_frame(t_game *game);
+void	mapdraw(t_game *game);
 void	drawenemy(t_game *game, int	i, int i2);
 void	drawexit(t_game *game, int	i, int i2);
 void	animate_coins(t_game *game, int	i, int i2);
+void	heropics(t_game *game);
+void	animate_heroright(t_game *game, int i, int i2);
+void	animate_heroleft(t_game *game, int i, int i2);
+void	animate_herodown(t_game *game, int i, int i2);
+void	animate_heroup(t_game *game, int i, int i2);
 
 #endif

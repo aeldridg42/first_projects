@@ -10,7 +10,7 @@ void	game_lenght(char *argv, t_game *game)
 	game->map.lenght = 0;
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
-		ft_error();
+		ft_error(3, game);
 	while (get_next_line(fd, &line))
 	{
 		game->map.lenght++;
@@ -41,7 +41,7 @@ int	game_line(t_game *game)
 		while (game->map.map[i][++i2])
 			count2++;
 		if (count != count2)
-			ft_error();
+			ft_error(2, game);
 		++i;
 	}
 	return (count);

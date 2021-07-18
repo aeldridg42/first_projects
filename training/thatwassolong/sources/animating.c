@@ -1,43 +1,18 @@
 #include "../includes/so_long.h"
 
-static void	animate_player2(t_game *game, int i, int i2)
-{
-	if (game->count.countanim == 2400)
-	{
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
-			game->images.grass, i * SCALE - 21, i2 * SCALE);
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
-			game->images.hero.hero3, i * SCALE - 21, i2 * SCALE);
-	}
-	else if (game->count.countanim == 3600)
-	{
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
-			game->images.grass, i * SCALE - 21, i2 * SCALE);
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
-			game->images.hero.hero4, i * SCALE - 21, i2 * SCALE);
-	}
-}
-
 static void	animate_player(t_game *game, int i, int i2)
 {
-	if (game->count.countanim == 1)
-	{
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
-			game->images.grass, i * SCALE - 21, i2 * SCALE);
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
-			game->images.player, i * SCALE - 21, i2 * SCALE);
-	}
-	else if (game->count.countanim == 1200)
-	{
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
-			game->images.grass, i * SCALE - 21, i2 * SCALE);
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
-			game->images.hero.hero2, i * SCALE - 21, i2 * SCALE);
-	}
-	animate_player2(game, i, i2);
+	if (game->players.heroflag == 2)
+		animate_heroright(game, i, i2);
+	if (game->players.heroflag == 1)
+		animate_herodown(game, i, i2);
+	if (game->players.heroflag == 3)
+		animate_heroup(game, i, i2);
+	if (game->players.heroflag == 0)
+		animate_heroleft(game, i, i2);
 }
 
-void	checkcounters(t_game *game)
+static void	checkcounters(t_game *game)
 {
 	if (game->count.exitflag)
 		game->count.exitflag += 1;
@@ -47,6 +22,9 @@ void	checkcounters(t_game *game)
 	game->count.countanim2 += 1;
 	if (game->count.countanim2 == 5500)
 		game->count.countanim2 = 0;
+	game->count.counthero += 1;
+	if (game->count.counthero == 6000)
+		game->count.counthero = 0;
 }
 
 int	render_next_frame(t_game *game)
