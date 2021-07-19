@@ -1,15 +1,15 @@
 NAME		=	so_long
 
 SRCS		= 	main.c \
-				sources/animatecoins.c \
-				sources/animateplayer1.c \
-				sources/animateplayer2.c \
-				sources/animating.c \
-				sources/animatingenemy.c \
-				sources/animatingexit.c \
+				sources/animations/animatecoins.c \
+				sources/animations/animateplayer1.c \
+				sources/animations/animateplayer2.c \
+				sources/animations/animating.c \
+				sources/animations/animatingenemy.c \
+				sources/animations/animatingexit.c \
+				sources/imageimport/images1.c \
+				sources/imageimport/images2.c \
 				sources/exiting.c \
-				sources/images1.c \
-				sources/images2.c \
 				sources/parser.c \
 				sources/mapdraw.c \
 				sources/measuring.c \
