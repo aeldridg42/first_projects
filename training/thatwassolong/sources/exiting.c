@@ -18,7 +18,7 @@ void	ft_error(int i, t_game *game)
 		ft_printf("Wrong number of arguments\n");
 	if (i == 5)
 	{
-		ft_printf("You have malloc error! Congratulations!\n");
+		ft_printf("You have \"MALLOC\" error! Congratulations!\n");
 		ft_free(game);
 	}
 	if (i == 6)
@@ -43,7 +43,7 @@ void	ft_free(t_game *game)
 
 int	ft_close(int keycode, t_game game)
 {
-	game.map.map[0][0] = '1';
+	// game.map.map[0][0] = '1';
 	if (keycode == 53)
 	{
 		mlx_destroy_window(game.mlx.mlx, game.mlx.win);

@@ -8,12 +8,12 @@ static void	gameinit(t_game *game)
 	game->count.countanim2 = 0;
 	game->count.exitflag = 0;
 	game->count.checkflag = 0;
-	game->players.heroflag = 2;
 	game->count.counthero = 0;
+	game->players.heroflag = 2;
 	game->mlx.mlx = mlx_init();
 	game->mlx.win = mlx_new_window(game->mlx.mlx,
-			game->map.linesize * SCALE - 42,
-			(game->map.lenght - 1) * SCALE - 21,
+			game->map.linesize * SCALE - SCALE,
+			(game->map.lenght - 1) * SCALE - HALF,
 			"it took \"So long\" to understand how mlx works");
 }
 
@@ -31,7 +31,7 @@ static void checkargv(char **argv, t_game *game)
 		ft_error(6, game);
 }
 
-int	main(int argc, char **argv)
+void	main(int argc, char **argv)
 {
 	t_game	game;
 

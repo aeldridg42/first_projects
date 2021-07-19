@@ -13,12 +13,12 @@ static void	mapcheck1(t_game *game)
 {
 	int	i;
 	int	i2;
-	int	p;
-	int	e;
+	int	playercount;
+	int	exitcount;
 
 	i = -1;
-	p = 0;
-	e = 0;
+	playercount = 0;
+	exitcount = 0;
 	while (game->map.map[++i])
 	{
 		i2 = -1;
@@ -29,10 +29,10 @@ static void	mapcheck1(t_game *game)
 			if (validletter(game->map.map[i][i2]) == 2)
 				game->map.collectable += 1;
 			if (game->map.map[i][i2] == 'P')
-				++p;
+				++playercount;
 			if (game->map.map[i][i2] == 'E')
-				++e;
-			if (e > 1 || p > 1)
+				++exitcount;
+			if (exitcount > 1 || playercount > 1)
 				ft_error(2, game);
 		}
 	}

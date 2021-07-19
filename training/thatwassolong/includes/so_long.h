@@ -1,11 +1,18 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # define SCALE 42
+# define HALF 21
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_W 13
+# define KEY_ESC 53
+
 
 # include <mlx.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
+// # include <stdlib.h>
+// # include <unistd.h>
+// # include <fcntl.h>
 # include "../get_next_line/get_next_line.h"
 # include "../ft_printf/includes/ft_printf.h"
 
@@ -115,6 +122,7 @@ int		game_line(t_game *game);
 void	game_lenght(char *argv, t_game *game);
 void	parser(char **argv, t_game *game);
 
+int		key_hook(int keycode, t_game *game);
 void	moveright(t_game *game);
 void	moveleft(t_game *game);
 void	moveup(t_game *game);
@@ -123,16 +131,15 @@ void	keycode_d(t_game *game);
 void	keycode_a(t_game *game);
 void	keycode_w(t_game *game);
 void	keycode_s(t_game *game);
-int		key_hook(int keycode, t_game *game);
 
 void	getimage(t_game *game);
+void	heropics(t_game *game);
 
 int		render_next_frame(t_game *game);
 void	mapdraw(t_game *game);
 void	drawenemy(t_game *game, int	i, int i2);
 void	drawexit(t_game *game, int	i, int i2);
 void	animate_coins(t_game *game, int	i, int i2);
-void	heropics(t_game *game);
 void	animate_heroright(t_game *game, int i, int i2);
 void	animate_heroleft(t_game *game, int i, int i2);
 void	animate_herodown(t_game *game, int i, int i2);

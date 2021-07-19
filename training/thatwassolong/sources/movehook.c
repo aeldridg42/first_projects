@@ -106,23 +106,23 @@ void	keycode_w(t_game *game)
 
 int	key_hook(int keycode, t_game *game)
 {
-	if (keycode == 53)
+	if (keycode == KEY_ESC)
 		ft_close(53, *game);
-	if (keycode == 2)
+	if (keycode == KEY_D)
 		keycode_d(game);
-	if (keycode == 1)
+	if (keycode == KEY_S)
 		keycode_s(game);
-	if (keycode == 0)
+	if (keycode == KEY_A)
 		keycode_a(game);
-	if (keycode == 13)
+	if (keycode == KEY_W)
 		keycode_w(game);
 	if (game->map.collectable == 0 && !game->count.exitflag)
 		game->count.exitflag = 1;
 	game->num = ft_itoa(game->count.countmoves);
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
-		game->images.wall, 0 - 21, 0);
+		game->images.wall, -HALF, 0);
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
-		game->images.wall, SCALE - 21, 0);
+		game->images.wall, HALF, 0);
 	mlx_string_put(game->mlx.mlx, game->mlx.win, 10, 5, 0x00FF00, game->num);
 	free (game->num);
 	return (0);
