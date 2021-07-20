@@ -10,9 +10,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	while (n--)
 	{
 		if (*str == symb)
-		{
 			return (str);
-		}
 		str++;
 	}
 	return (NULL);

@@ -4,27 +4,27 @@ void	ft_error(int i, t_game *game)
 {
 	if (i == 1)
 	{
-		ft_printf("Image importing error\n");
+		printf("Image importing error\n");
 		ft_free(game);
 	}
 	if (i == 2)
 	{
-		ft_printf("Invalid map\n");
+		printf("Invalid map\n");
 		ft_free(game);
 	}
 	if (i == 3)
-		ft_printf("File reading error\n");
+		printf("File reading error\n");
 	if (i == 4)
-		ft_printf("Wrong number of arguments\n");
+		printf("Wrong number of arguments\n");
 	if (i == 5)
 	{
-		ft_printf("You have \"MALLOC\" error! Congratulations!\n");
+		printf("You have \"MALLOC\" error! Congratulations!\n");
 		ft_free(game);
 	}
 	if (i == 6)
-		ft_printf("Wrong map format\n");
+		printf("Wrong map format\n");
 	if (i == 7)
-		ft_printf("Map is too big\n");
+		printf("Map is too big\n");
 	exit (1);
 }
 
@@ -49,7 +49,7 @@ int	ft_close(int keycode, t_game game)
 		mlx_destroy_window(game.mlx.mlx, game.mlx.win);
 		ft_free(&game);
 	}
-	ft_printf("Closing...\n");
+	printf("Closing...\n");
 	exit (0);
 	return (0);
 }
@@ -58,7 +58,7 @@ void	winning(t_game *game)
 {
 	ft_free(game);
 	mlx_destroy_window(game->mlx.mlx, game->mlx.win);
-	ft_printf("Your moves - %d\nYou WON!\n", game->count.countmoves + 1);
+	printf("Your moves - %d\nYou WON!\n", game->count.countmoves + 1);
 	exit (0);
 }
 
@@ -66,7 +66,7 @@ void	loosing(t_game *game)
 {
 	ft_free(game);
 	mlx_destroy_window(game->mlx.mlx, game->mlx.win);
-	ft_printf("Your moves - %d\nYou LOST! Such a shame...\n",
+	printf("Your moves - %d\nYou LOST! Such a shame...\n",
 		game->count.countmoves + 1);
 	exit (0);
 }

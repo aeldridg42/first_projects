@@ -7,14 +7,13 @@
 # define KEY_D 2
 # define KEY_W 13
 # define KEY_ESC 53
-
+# define BUFFER_SIZE 1
 
 # include <mlx.h>
-// # include <stdlib.h>
-// # include <unistd.h>
-// # include <fcntl.h>
-# include "../get_next_line/get_next_line.h"
-# include "../ft_printf/includes/ft_printf.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
 
 typedef struct s_map {
 	char		**map;
@@ -144,5 +143,11 @@ void	animate_heroright(t_game *game, int i, int i2);
 void	animate_heroleft(t_game *game, int i, int i2);
 void	animate_herodown(t_game *game, int i, int i2);
 void	animate_heroup(t_game *game, int i, int i2);
+
+int		get_next_line(int fd, char **line);
+int		nl_check(char *str);
+int		ft_strlen(const char *s);
+int		ft_return(int charsread, char **line);
+char	*strjoin_free(char *s1, char *s2);
 
 #endif

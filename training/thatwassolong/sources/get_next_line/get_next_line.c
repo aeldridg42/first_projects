@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "so_long.h"
 
 static int	i_search(char *leftchars)
 {
@@ -23,7 +23,7 @@ static char	*ft_leftchars(char *leftchars)
 		return (NULL);
 	}
 	l = 0;
-	new_lch = (char *)malloc(sizeof(char) * ((ft_strlen1(leftchars) - i) + 1));
+	new_lch = (char *)malloc(sizeof(char) * ((ft_strlen(leftchars) - i) + 1));
 	if (!new_lch)
 		return (NULL);
 	while (leftchars[++i])

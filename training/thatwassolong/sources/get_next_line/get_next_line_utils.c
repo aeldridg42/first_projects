@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-int	ft_strlen1(const char *s)
+int	ft_strlen(const char *s)
 {
 	int	i;
 
@@ -24,8 +24,8 @@ char	*strjoin_free(char *s1, char *s2)
 		return (NULL);
 	l = -1;
 	j = 0;
-	s1_count = ft_strlen1(s1);
-	s2_count = ft_strlen1(s2);
+	s1_count = ft_strlen(s1);
+	s2_count = ft_strlen(s2);
 	arr = (char *)malloc(sizeof(char) * (s1_count + s2_count + 1));
 	if (!arr)
 		return (NULL);

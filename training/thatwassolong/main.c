@@ -21,9 +21,7 @@ static void checkargv(char **argv, t_game *game)
 {
 	int i;
 
-	i = 0;
-	while(argv[1][i])
-		i++;
+	i = ft_strlen(argv[1]);
 	if (i < 5)
 		ft_error(6, game);
 	if (argv[1][i - 4] != '.' || argv[1][i - 3] != 'b'

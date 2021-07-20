@@ -15,8 +15,8 @@ SRCS		= 	main.c \
 				sources/measuring.c \
 				sources/movedraw.c \
 				sources/movehook.c \
-				get_next_line/get_next_line.c \
-				get_next_line/get_next_line_utils.c \
+				sources/get_next_line/get_next_line.c \
+				sources/get_next_line/get_next_line_utils.c \
 
 OBJS		= 	${SRCS:.c=.o}
 
@@ -37,13 +37,11 @@ bonus:			${NAME}
 $(NAME): 		$(OBJS)
 				@$(MAKE) -C ./minilibx_mms_20200219
 				@$(MAKE) -C ./minilibx_opengl_20191021
-				@$(MAKE) -C ./ft_printf
 				@mv minilibx_mms_20200219/libmlx.dylib .
 				@mv minilibx_opengl_20191021/libmlx.a .
-				@${CC} ${OBJS} ${CFLAGS} ${MLX} ./ft_printf/libftprintf.a libmlx.dylib libmlx.a -o ${NAME}
+				@${CC} ${OBJS} ${CFLAGS} ${MLX} libmlx.dylib libmlx.a -o ${NAME}
 
 clean:
-				@$(MAKE) -C ./ft_printf fclean
 				@$(MAKE) -C ./minilibx_mms_20200219 clean
 				@$(MAKE) -C ./minilibx_opengl_20191021 clean
 				${RM} ${OBJS} 

@@ -25,7 +25,7 @@ void	moveright(t_game *game)
 			game->images.player, (game->players.p_x + 1) * SCALE - HALF,		 // ??
 			game->players.p_y * SCALE);										 // ??
 	}
-	ft_printf("Your moves - %d\n", game->count.countmoves += 1);
+	printf("Your moves - %d\n", game->count.countmoves += 1);
 }
 
 void	moveleft(t_game *game)
@@ -51,7 +51,7 @@ void	moveleft(t_game *game)
 			game->players.anim.heroleft1, (game->players.p_x - 1) * SCALE - HALF, // ??
 			game->players.p_y * SCALE);											// ??
 	}
-	ft_printf("Your moves - %d\n", game->count.countmoves += 1);
+	printf("Your moves - %d\n", game->count.countmoves += 1);
 }
 
 void	moveup(t_game *game)
@@ -77,7 +77,7 @@ void	moveup(t_game *game)
 			game->players.anim.heroup1,											// ??
 			game->players.p_x * SCALE - HALF, (game->players.p_y - 1) * SCALE);	// ??
 	}
-	ft_printf("Your moves - %d\n", game->count.countmoves += 1);
+	printf("Your moves - %d\n", game->count.countmoves += 1);
 }
 
 void	movedown(t_game *game)
@@ -103,5 +103,5 @@ void	movedown(t_game *game)
 			game->players.anim.herodown1,										// ??
 			game->players.p_x * SCALE - HALF, (game->players.p_y + 1) * SCALE);	// ??
 	}
-	ft_printf("Your moves - %d\n", game->count.countmoves += 1);
+	printf("Your moves - %d\n", game->count.countmoves += 1);
 }

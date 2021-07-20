@@ -1,6 +1,6 @@
 #include "libft.h"
 
-static int	ctr(int n)
+static int	ctr(long n)
 {
 	int		i;
 
