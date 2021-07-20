@@ -35,15 +35,15 @@ all: 			$(NAME)
 bonus:			${NAME}
 
 $(NAME): 		$(OBJS)
-				@$(MAKE) -C ./minilibx_mms_20200219
-				@$(MAKE) -C ./minilibx_opengl_20191021
-				@mv minilibx_mms_20200219/libmlx.dylib .
-				@mv minilibx_opengl_20191021/libmlx.a .
+				@$(MAKE) -C ./mlx/minilibx_mms_20200219
+				@$(MAKE) -C ./mlx/minilibx_opengl_20191021
+				@mv mlx/minilibx_mms_20200219/libmlx.dylib .
+				@mv mlx/minilibx_opengl_20191021/libmlx.a .
 				@${CC} ${OBJS} ${CFLAGS} ${MLX} libmlx.dylib libmlx.a -o ${NAME}
 
 clean:
-				@$(MAKE) -C ./minilibx_mms_20200219 clean
-				@$(MAKE) -C ./minilibx_opengl_20191021 clean
+				@$(MAKE) -C ./mlx/minilibx_mms_20200219 clean
+				@$(MAKE) -C ./mlx/minilibx_opengl_20191021 clean
 				${RM} ${OBJS} 
 
 fclean:			clean
