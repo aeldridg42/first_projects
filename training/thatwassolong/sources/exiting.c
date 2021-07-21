@@ -4,27 +4,27 @@ void	ft_error(int i, t_game *game)
 {
 	if (i == 1)
 	{
-		printf("Image importing error\n");
+		printf("Error\nCan't import image\n");
 		ft_free(game);
 	}
 	if (i == 2)
 	{
-		printf("Invalid map\n");
+		printf("Error\nInvalid map\n");
 		ft_free(game);
 	}
 	if (i == 3)
-		printf("File reading error\n");
+		printf("Error\nCan't read file\n");
 	if (i == 4)
-		printf("Wrong number of arguments\n");
+		printf("Error\nWrong number of arguments\n");
 	if (i == 5)
 	{
-		printf("You have \"MALLOC\" error! Congratulations!\n");
+		printf("Error\ncCan't allocate memory\n");
 		ft_free(game);
 	}
 	if (i == 6)
-		printf("Wrong map format\n");
+		printf("Error\nWrong map format\n");
 	if (i == 7)
-		printf("Map is too big\n");
+		printf("Error\nMap is too big\n");
 	exit (1);
 }
 
@@ -43,7 +43,6 @@ void	ft_free(t_game *game)
 
 int	ft_close(int keycode, t_game game)
 {
-	// game.map.map[0][0] = '1';
 	if (keycode == 53)
 	{
 		mlx_destroy_window(game.mlx.mlx, game.mlx.win);

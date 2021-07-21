@@ -17,6 +17,7 @@ SRCS		= 	main.c \
 				sources/movehook.c \
 				sources/get_next_line/get_next_line.c \
 				sources/get_next_line/get_next_line_utils.c \
+				sources/libft/ft_itoa.c \
 
 OBJS		= 	${SRCS:.c=.o}
 
@@ -40,6 +41,9 @@ $(NAME): 		$(OBJS)
 				@mv mlx/minilibx_mms_20200219/libmlx.dylib .
 				@mv mlx/minilibx_opengl_20191021/libmlx.a .
 				@${CC} ${OBJS} ${CFLAGS} ${MLX} libmlx.dylib libmlx.a -o ${NAME}
+
+%.o : %.c 		${INCLUDES}
+				${CC} ${CFLAGS} -c $< -I ${INCLUDES} -o ${<:.c=.o}
 
 clean:
 				@$(MAKE) -C ./mlx/minilibx_mms_20200219 clean

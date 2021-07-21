@@ -149,5 +149,6 @@ int		nl_check(char *str);
 int		ft_strlen(const char *s);
 int		ft_return(int charsread, char **line);
 char	*strjoin_free(char *s1, char *s2);
+char	*ft_itoa(int n);
 
 #endif

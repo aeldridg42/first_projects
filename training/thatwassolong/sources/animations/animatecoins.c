@@ -1,4 +1,4 @@
-#include "../includes/so_long.h"
+#include "../../includes/so_long.h"
 
 void	animate_coins2(t_game *game, int i, int i2)
 {

@@ -9,9 +9,6 @@ void	moveright(t_game *game)
 		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
 			game->images.grass, (game->players.p_x) * SCALE - HALF,
 			game->players.p_y * SCALE);
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,             // ??
-			game->images.player, (game->players.p_x + 1) * SCALE - HALF,    // ??
-			game->players.p_y * SCALE);                                   // ??
 	}
 	else if (game->map.map[game->players.p_y][game->players.p_x + 1] == 'C')
 	{
@@ -21,9 +18,6 @@ void	moveright(t_game *game)
 		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
 			game->images.grass, (game->players.p_x + 1) * SCALE - HALF,
 			game->players.p_y * SCALE);
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,				 // ??
-			game->images.player, (game->players.p_x + 1) * SCALE - HALF,		 // ??
-			game->players.p_y * SCALE);										 // ??
 	}
 	printf("Your moves - %d\n", game->count.countmoves += 1);
 }
@@ -35,9 +29,6 @@ void	moveleft(t_game *game)
 		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
 			game->images.grass, (game->players.p_x) * SCALE - HALF,
 			game->players.p_y * SCALE);
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,					// ??
-			game->players.anim.heroleft1, (game->players.p_x - 1) * SCALE - HALF,	// ??
-			game->players.p_y * SCALE);											// ??
 	}
 	else if (game->map.map[game->players.p_y][game->players.p_x - 1] == 'C')
 	{
@@ -47,9 +38,6 @@ void	moveleft(t_game *game)
 		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
 			game->images.grass, (game->players.p_x) * SCALE - HALF,
 			game->players.p_y * SCALE);
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,					// ??
-			game->players.anim.heroleft1, (game->players.p_x - 1) * SCALE - HALF, // ??
-			game->players.p_y * SCALE);											// ??
 	}
 	printf("Your moves - %d\n", game->count.countmoves += 1);
 }
@@ -61,9 +49,6 @@ void	moveup(t_game *game)
 		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
 			game->images.grass, game->players.p_x * SCALE - HALF,
 			game->players.p_y * SCALE);
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,					// ??
-			game->players.anim.heroup1, game->players.p_x * SCALE - HALF,			// ??
-			(game->players.p_y - 1) * SCALE);									// ??
 	}
 	else if (game->map.map[game->players.p_y - 1][game->players.p_x] == 'C')
 	{
@@ -73,9 +58,6 @@ void	moveup(t_game *game)
 		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
 			game->images.grass, game->players.p_x * SCALE - HALF,
 			game->players.p_y * SCALE);
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,					// ??
-			game->players.anim.heroup1,											// ??
-			game->players.p_x * SCALE - HALF, (game->players.p_y - 1) * SCALE);	// ??
 	}
 	printf("Your moves - %d\n", game->count.countmoves += 1);
 }
@@ -87,9 +69,6 @@ void	movedown(t_game *game)
 		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
 			game->images.grass, game->players.p_x * SCALE - HALF,
 			game->players.p_y * SCALE);
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,					// ??
-			game->players.anim.herodown1, game->players.p_x * SCALE - HALF,		// ??
-			(game->players.p_y + 1) * SCALE);									// ??
 	}
 	else if (game->map.map[game->players.p_y + 1][game->players.p_x] == 'C')
 	{
@@ -99,9 +78,6 @@ void	movedown(t_game *game)
 		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
 			game->images.grass,
 			game->players.p_x * SCALE - HALF, game->players.p_y * SCALE);
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,					// ??
-			game->players.anim.herodown1,										// ??
-			game->players.p_x * SCALE - HALF, (game->players.p_y + 1) * SCALE);	// ??
 	}
 	printf("Your moves - %d\n", game->count.countmoves += 1);
 }

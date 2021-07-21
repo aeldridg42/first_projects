@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "../../includes/so_long.h"
 
 static int	i_search(char *leftchars)
 {
@@ -53,7 +53,7 @@ static char	*ft_line(char *leftchars)
 	return (line);
 }
 
-static int	ft_error(int fd, char *buffer, int charsread)
+static int	ft_error1(int fd, char *buffer, int charsread)
 {
 	int	i;
 
@@ -78,12 +78,12 @@ int	get_next_line(int fd, char **line)
 	if (!line || BUFFER_SIZE < 1)
 		return (-1);
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (ft_error(fd, buffer, charsread))
+	if (ft_error1(fd, buffer, charsread))
 		return (-1);
 	while (nl_check(leftchars) && charsread != 0)
 	{
 		charsread = read(fd, buffer, BUFFER_SIZE);
-		if (ft_error(fd, buffer, charsread))
+		if (ft_error1(fd, buffer, charsread))
 			return (-1);
 		buffer[charsread] = '\0';
 		leftchars = strjoin_free(leftchars, buffer);

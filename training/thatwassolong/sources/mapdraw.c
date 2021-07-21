@@ -4,10 +4,6 @@ static void	draw1(t_game *game, int i, int i2)
 {
 	if (game->map.map[i][i2] == 'P')
 	{
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win, // ??
-			game->images.grass, i2 * SCALE - HALF, i * SCALE);  // ??
-		mlx_put_image_to_window(game->mlx.mlx, game->mlx.win, // ??
-			game->images.player, i2 * SCALE - HALF, i * SCALE); // ??
 		game->players.p_x = i2;
 		game->players.p_y = i;
 	}

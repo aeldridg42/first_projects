@@ -17,9 +17,9 @@ static void	gameinit(t_game *game)
 			"it took \"So long\" to understand how mlx works");
 }
 
-static void checkargv(char **argv, t_game *game)
+static void	checkargv(char **argv, t_game *game)
 {
-	int i;
+	int	i;
 
 	i = ft_strlen(argv[1]);
 	if (i < 5)
@@ -29,7 +29,7 @@ static void checkargv(char **argv, t_game *game)
 		ft_error(6, game);
 }
 
-void	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_game	game;
 

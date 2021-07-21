@@ -1,4 +1,4 @@
-#include "../includes/so_long.h"
+#include "../../includes/so_long.h"
 
 static void	animate_heroright1(t_game *game, int i, int i2)
 {

@@ -1,4 +1,4 @@
-#include "../includes/so_long.h"
+#include "../../includes/so_long.h"
 
 static void	drawexit4(t_game *game, int i, int i2)
 {
